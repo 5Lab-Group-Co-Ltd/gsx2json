@@ -1,7 +1,7 @@
 //
 const { GoogleSpreadsheet } = require('google-spreadsheet')
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   const sheetId = req.body.sheetId
   const creds = req.body.creds
   const doc = new GoogleSpreadsheet(sheetId)
