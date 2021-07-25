@@ -22,7 +22,7 @@ app.use(express.json())
 // get api
 app.get('/api', api)
 app.get('/v1/api/get', api)
-app.get('/v1/api/add-row', addRowAPI)
+app.post('/v1/api/add-row', addRowAPI)
 
 // error handler
 app.use(function (err, req, res, next) {
