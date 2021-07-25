@@ -11,7 +11,7 @@ module.exports = async (req, res, next) => {
     return res.json(err)
   }
   await doc.loadInfo()
-  const sheet = doc.sheetsByIndex[2]
+  const sheet = doc.sheetsByIndex[req.body.sheetIndex]
   /**
    * [
     {
