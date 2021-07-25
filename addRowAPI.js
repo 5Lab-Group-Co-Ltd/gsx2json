@@ -5,7 +5,11 @@ module.exports = async (req, res, next) => {
   const sheetId = req.body.sheetId
   const creds = req.body.creds
   const doc = new GoogleSpreadsheet(sheetId)
-  await doc.useServiceAccountAuth(creds)
+  try {
+    await doc.useServiceAccountAuth(creds)
+  } catch (err) {
+    return res.json(err)
+  }
   await doc.loadInfo()
   const sheet = doc.sheetsByIndex[2]
   /**
@@ -23,9 +27,9 @@ module.exports = async (req, res, next) => {
    */
   const resAddRow = await sheet.addRows([req.body.fields])
   // Send email
-  return {
+  return res.json({
     success: true,
     fields: req.body.fields,
-  }
+  })
   //
 }
