@@ -4,7 +4,12 @@ const { GoogleSpreadsheet } = require('google-spreadsheet')
 module.exports = async (req, res, next) => {
   const sheetId = req.body.sheetId
   const creds = req.body.creds
-  const doc = new GoogleSpreadsheet(sheetId)
+  let doc
+  try {
+    doc = new GoogleSpreadsheet(sheetId)
+  } catch (err) {
+    return res.json(err)
+  }
   try {
     await doc.useServiceAccountAuth(creds)
   } catch (err) {
